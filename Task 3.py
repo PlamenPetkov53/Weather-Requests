@@ -45,8 +45,20 @@ def RequestWeather():
                                     
                                     sky.append(i['description'])
             
-        min_temp = round(min(coldest_city))
-        average_temp=round(sum(coldest_city) / len(coldest_city))
+        else:
+                url = f"http://api.openweathermap.org/data/2.5/weather?q={user_input[0]}&appid={api_key}&units=metric"
+                response = requests.get(url)
+                data = json.loads(response.text)
+                if "message" in data:
+                    city_not_found = data["message"]
+                    
+                else:
+                    name_of_city = data['name']
+                    current_temp = round(data['main']['temp'])
+                    current_humidity = data['main']['humidity']
+                    for i in data["weather"]:
+                        sky = i['description']
+                    
 
 
       
