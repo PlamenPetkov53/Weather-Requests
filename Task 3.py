@@ -12,16 +12,16 @@ def RequestWeather():
     coldest_city=[]
     input = ""
     city_not_found = ""
-    name_of_city =""
-    current_humidity=""
-    current_temp = ""
+    name_of_city =[]
+    current_humidity=[]
+    current_temp = []
     min_temp = ""
     average_temp = ""
-    sky = ""
+    sky = []
     
     if request.method == 'POST' and  'Input' in request.form:
         first  = str(request.form.get('Input'))
-       user_input = re.findall(r"[\w']+", first
+        user_input = re.findall(r"[\w']+", first)
        
         if len(user_input) == 5:
 
@@ -33,23 +33,24 @@ def RequestWeather():
                                 city_not_found = data_five["message"]
                             else:
         
-                                name_of_city = data_five['name']
+                                name_of_city.append(data_five['name'])
                                 coldest_city.append(data_five['main']['temp'])
                              
-                                current_temp= round(data_five['main']['temp']
+                                current_temp.append(round(data_five['main']['temp']))
                             
-                                current_humidity=data_five['main']['humidity']
+                                current_humidity.append(data_five['main']['humidity'])
+                               
 
                                 for i in data_five["weather"]:
                                     
-                                    sky=i['description']
+                                    sky.append(i['description'])
             
-            min_temp = round(min(coldest_city))
-            average_temp=round(sum(coldest_city) / len(coldest_city))
+        min_temp = round(min(coldest_city))
+        average_temp=round(sum(coldest_city) / len(coldest_city))
 
 
       
-    return render_template("index.html", city_not_found=city_not_found, name_of_city=name_of_city, current_temp=current_tempр, current_humidity=current_humidity, sky=sky, min_temp=min_temp, average_temp=average_temp )
+    return render_template("index.html", city_not_found=city_not_found, name_of_city=name_of_city, current_temp=current_temp, current_humidity=current_humidity, sky=sky, min_temp=min_temp, average_temp=average_temp )
                         
 
 
