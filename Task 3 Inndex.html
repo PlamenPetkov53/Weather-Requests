@@ -7,32 +7,32 @@
         <button type="submit" value = "submit">Request</button>
         </form>
         {%if city_not_found %}
-        <p>Your BMI is: {{city_not_found}}</p>
+        <p> {{city_not_found}}</p>
         {%endif%}
 
         {%if name_of_city %}
-        <p>Your BMI is: {{name_of_city}}</p>
+        <p>Name of citie/s: {{name_of_city}}</p>
         {%endif%}
 
         {%if current_temp %}
-        <p>Your BMI is: {{current_temp}}</p>
+        <p>Current temperature is : {{current_temp}} degrees Celsius</p>
         {%endif%}
 
         {%if current_humidity %}
-        <p>Your BMI is: {{current_humidity}}</p>
+        <p>Current humidity: {{current_humidity}} %</p>
         {%endif%}
 
         {%if sky %}
-        <p>Your BMI is: {{sky}}</p>
+        <p>Sky description: {{sky}}</p>
         {%endif%}
 
         {%if min_temp %}
-        <p>Your BMI is: {{min_temp}}</p>
+        <p>Minimum temperature is : {{min_temp}}</p>
         {%endif%}
 
        
         {%if  average_temp %}
-        <p>Your BMI is: {{average_temp}}</p>
+        <p>Average temperature: {{average_temp}}</p>
         {%endif%}
     </body>
 </html>
