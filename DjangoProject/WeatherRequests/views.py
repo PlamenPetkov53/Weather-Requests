@@ -46,5 +46,28 @@ def input (request):
 
 #For User Input
 def index (request):
+     city_not_found = ""
+     name_of_city = ""
+     current_humidity=""
+     current_temp = ""
+     sky = ""
+
+
+
+
      num1 = request.GET['input']
-     return render(request, 'form.html', {"smth": num1})
+     api_key = "11f4d17a26f59a54f5685e9bf59ef4fe"
+     user_input = re.findall(r"[\w']+", num1)
+     url = f"http://api.openweathermap.org/data/2.5/weather?q={user_input[0]}&appid={api_key}&units=metric"
+     response = requests.get(url)
+     data = json.loads(response.text)
+     if "message" in data:
+          city_not_found = data["message"]
+                    
+     else:
+          name_of_city = data['name']
+          current_temp = round(data['main']['temp'])
+          current_humidity = data['main']['humidity']
+          for i in data["weather"]:
+               sky = i['description']
+     return render(request, 'form.html', {"smth":[city_not_found, name_of_city, current_temp, current_humidity, sky]})
