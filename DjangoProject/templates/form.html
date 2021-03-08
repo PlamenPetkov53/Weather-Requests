@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherRequests</title>
+</head>
+<body>
+    <form action="input">
+    Input: <input type="text" name="input"><br>
+    <input type="submit">
+    </form>
+    {% block content %}
+        {{ result.0 }}<br>
+        {{ result.1 }}<br>
+        {{ result.2 }}<br>
+        {{ result.3 }}<br>
+        {{ result.4 }}<br>
+        {{ result.5 }}<br>
+        {{ smth }}
+     
+        
+    {% endblock %}
+
+    
+</body>
+</html>
