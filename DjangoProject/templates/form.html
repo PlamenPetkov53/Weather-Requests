@@ -12,13 +12,18 @@
     <input type="submit">
     </form>
     {% block content %}
-        {{ result.0 }}<br>
-        {{ result.1 }}<br>
-        {{ result.2 }}<br>
-        {{ result.3 }}<br>
-        {{ result.4 }}<br>
-        {{ result.5 }}<br>
-        {{ smth }}
+        {{ result.0 }}   {{ smth.0 }}<br>
+        Name of citie/s:   {{ result.1 }}  {{ smth.1 }}<br>
+        Current temperature is: {{ result.2 }}  {{ smth.2 }}<br>
+        Current humidity: {{ result.3 }}   {{ smth.3 }}<br>
+        Sky description:   {{ result.4 }}   {{ smth.4 }}<br>
+        Minimum temperature is : {{ result.5 }}<br>   
+        Average temperature: {{result.6}}
+        
+       
+        
+        
+        
      
         
     {% endblock %}
