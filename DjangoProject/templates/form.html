@@ -6,27 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherRequests</title>
 </head>
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    </style>
 <body>
     <form action="input">
     Input: <input type="text" name="input"><br>
     <input type="submit">
     </form>
     {% block content %}
-        {{ result.0 }}   {{ smth.0 }}<br>
-        Name of citie/s:   {{ result.1 }}  {{ smth.1 }}<br>
-        Current temperature is: {{ result.2 }}  {{ smth.2 }}<br>
-        Current humidity: {{ result.3 }}   {{ smth.3 }}<br>
-        Sky description:   {{ result.4 }}   {{ smth.4 }}<br>
-        Minimum temperature is : {{ result.5 }}<br>   
-        Average temperature: {{result.6}}
-        
-       
-        
-        
-        
-     
-        
+    {% if city_not_found %}  {{ city_not_found }} {% endif %}  {% if smth.0 %} {{ smth.0 }}  {% endif %}<br>
+    Name of citie/s:   {{ name }}  {{ smth.1 }}<br>
+    Current temperature is: {{ cuurent_temp }}  {{ smth.2 }}<br>
+    Current humidity: {{ current_humidity }}   {{ smth.3 }}<br>
+    Sky description:   {{ Sky_Descp }}   {{ smth.4 }}<br>
+    {% if min_temp %} Minimum temperature is : {{ min_temp }} {% endif %}<br>   
+    {% if average_temp %} Average temperature: {{average_temp}} {% endif %}<br>       
     {% endblock %}
+    <form action="table">
+    <table border="1" width="600">
+        {% if table %}
+        <tr>
+        <td>Cties name</td>
+        <td>Temp</td>
+        <td>humidity</td>
+        <td>sky</td>
+        </tr>
+        
+        {% for db in table %}
+        <tr>
+        <td>{{ db.name_of_city }}</td>
+        <td>
+        {{ db.current_temp }}</td>
+        <td>
+            {{ db.current_humidity }}</td>
+        <td>
+                {{ db.sky_cond }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </table>
+    <input type="submit"  value="Show And Refresh DB">
+    </form>
+        
 
     
 </body>
