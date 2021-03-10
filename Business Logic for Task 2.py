@@ -33,7 +33,12 @@ class WeatherRequests:
 
     def search_for_five_cities (self, user_input, t4, t5, t6, t7, t8, t9):
         coldest_city = []
-        for x in user_input:
+        new_list = []
+        cities = ['Tokyo', 'Delhi', 'Shanghai', 'Cairo', 'Monaco', 'Mumbai', 'Karachi', 'Osaka', 'Istanbul', 'Lago',
+                  'Moscow', 'Lahore', 'Bangalore', 'Paris', 'Bogota', 'Jakarta', 'Lima', 'Seoul', 'London', 'Chicago',
+                  'Madrid', 'Toronto', 'Sofia', 'Plovdiv', 'Burgas']
+        new_list += random.sample(cities, 5)
+        for x in new_list:
             url_five = f"http://api.openweathermap.org/data/2.5/weather?q={x}&appid=11f4d17a26f59a54f5685e9bf59ef4fe&units=metric"
             response_five = requests.get(url_five)
             data_five = json.loads(response_five.text)
