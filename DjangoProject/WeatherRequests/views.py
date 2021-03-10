@@ -64,8 +64,8 @@ def index (request):
 
      num1 = request.GET['input']
      api_key = "11f4d17a26f59a54f5685e9bf59ef4fe"
-     user_input = re.findall(r"[\w']+", num1)
-     url = f"http://api.openweathermap.org/data/2.5/weather?q={user_input[0]}&appid={api_key}&units=metric"
+     #user_input = re.findall(r"[\w']+", num1)
+     url = f"http://api.openweathermap.org/data/2.5/weather?q={num1}&appid={api_key}&units=metric"
      response = requests.get(url)
      data = json.loads(response.text)
      if "message" in data:
