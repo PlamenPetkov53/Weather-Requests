@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import RequestedCities
 import os
 import requests
 import re
@@ -7,6 +8,7 @@ import random
 import json
 #For START UP Random Generator
 def input (request):
+    x = " "
     api_key = "11f4d17a26f59a54f5685e9bf59ef4fe"
     new_list =[]
     cities =  ['Tokyo', 'Delhi', 'Shanghai', 'Cairo', 'Monaco', 'Mumbai', 'Karachi', 'Osaka', 'Istanbul', 'Lago', 'Moscow', 'Lahore', 'Bangalore', 'Paris', 'Bogota', 'Jakarta', 'Lima', 'Seoul', 'London', 'Chicago', 'Madrid', 'Toronto', 'Sofia', 'Plovdiv', 'Burgas']
@@ -21,6 +23,9 @@ def input (request):
     min_temp = ""
     average_temp = ""
     sky = []
+    
+    obj = RequestedCities.objects.all()
+
     for x in new_list:
             url_five = f"http://api.openweathermap.org/data/2.5/weather?q={x}&appid={api_key}&units=metric"
             response_five = requests.get(url_five)
@@ -42,17 +47,17 @@ def input (request):
                     sky.append(i['description'])
     min_temp = round(min(coldest_city))
     average_temp = round(sum(coldest_city) / len(coldest_city))
-    return render(request, 'form.html', {"result": [city_not_found, name_of_city, current_temp, current_humidity, sky, min_temp, average_temp]})
-
+    context= {'result': obj, 'name': name_of_city, 'cuurent_temp': current_temp, 'current_humidity': current_humidity, 'Sky_Descp': sky, 'min_temp': min_temp, 'average_temp': average_temp, 'city_not_found': city_not_found}
+    #return render(request, 'form.html', {"result": [city_not_found, name_of_city, current_temp, current_humidity, sky, min_temp, average_temp, obj]})
+    return render(request, 'form.html', context)
 #For User Input
 def index (request):
      city_not_found = ""
-     name_of_city = ""
+     name_of_city = "S"
      current_humidity=""
      current_temp = ""
      sky = ""
-
-
+     
 
 
      num1 = request.GET['input']
@@ -66,8 +71,14 @@ def index (request):
                     
      else:
           name_of_city = data['name']
+          
           current_temp = round(data['main']['temp'])
           current_humidity = data['main']['humidity']
           for i in data["weather"]:
-               sky = i['description']
+            sky = i['description']
+
+       
+     WR_instance = RequestedCities.objects.create(name_of_city=name_of_city, current_temp=current_temp, current_humidity=current_humidity,sky_cond = sky)
+     WR_instance.save_base()
+     WR_instance.save()   
      return render(request, 'form.html', {"smth":[city_not_found, name_of_city, current_temp, current_humidity, sky]})
