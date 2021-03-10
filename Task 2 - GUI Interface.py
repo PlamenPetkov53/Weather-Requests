@@ -45,19 +45,18 @@ class MyWindow:
         self.t9.place(x=200, y=500)
 
     def add(self):
-
+        inpt = None
         user_input=self.t1.get()
         coldest_city = []
         inpt = re.findall(r"[\w']+", user_input)
 
-        if len(inpt) == 5:
-            FiveCities = DefWEatherRequests.WeatherRequests.search_for_five_cities(self, inpt, self.t4, self.t5, self.t6, self.t7, self.t8, self.t9)
-        elif len(inpt) > 1 and len(inpt) != 5:
-            self.t1.delete(0, 'end')
-            self.t1.insert(END, str("Cities should be 5 or ONLY 1"))
+        if len(inpt) == 1:
+            OneCity = DefWEatherRequests.WeatherRequests.search_for_one_city(self, inpt, self.t4, self.t5, self.t6,
+                                                                             self.t7, self.t8, self.t9)
         else:
+            FiveCities = DefWEatherRequests.WeatherRequests.search_for_five_cities(self, inpt, self.t4, self.t5,
+                                                                                   self.t6, self.t7, self.t8, self.t9)
 
-            OneCity = DefWEatherRequests.WeatherRequests.search_for_one_city(self, inpt, self.t4, self.t5, self.t6, self.t7, self.t8, self.t9)
 
 
 window=Tk()
