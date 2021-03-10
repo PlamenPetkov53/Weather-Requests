@@ -58,6 +58,7 @@ def index (request):
      current_humidity = None
      current_temp = None
      sky = None
+     smth = None
      
 
 
@@ -78,14 +79,24 @@ def index (request):
           for i in data["weather"]:
             sky = i['description']
 
-       
+
      WR_instance = RequestedCities.objects.create(name_of_city=name_of_city, current_temp=current_temp, current_humidity=current_humidity,sky_cond = sky)
      WR_instance.save_base()
      WR_instance.save()   
-     return render(request, 'form.html', {"smth":[city_not_found, name_of_city, current_temp, current_humidity, sky]})
+     context= {'reversed_list': smth, 'name_of_city_input': name_of_city, 'current_temp_input': current_temp, 'current_humidity_input': current_humidity, 'Sky_Descp_input': sky, 'city_not_found_input': city_not_found}
+     return render(request, 'form.html', context)
 
 def table(request):
     last_ten = RequestedCities.objects.all().order_by('-id')[:10]
     last_ten1 = reversed(last_ten)
     context= {'table': last_ten1}
+    return render(request, 'form.html', context)
+
+def Compare(request):
+    num1 = request.GET['input_first']
+    data1 = RequestedCities.objects.filter(id=int(num1)).values()
+
+    num2 = request.GET['input_second']
+    data2 = RequestedCities.objects.filter(id=int(num2)).values()
+    context = {"id1": data1, "id2": data2}
     return render(request, 'form.html', context)
