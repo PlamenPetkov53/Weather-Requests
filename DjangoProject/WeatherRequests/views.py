@@ -23,8 +23,10 @@ def input (request):
     min_temp = ""
     average_temp = ""
     sky = []
+    last_ten = RequestedCities.objects.all().order_by('-id')[:10]
+    last_ten1 = reversed(last_ten)
     
-    obj = RequestedCities.objects.all()
+
 
     for x in new_list:
             url_five = f"http://api.openweathermap.org/data/2.5/weather?q={x}&appid={api_key}&units=metric"
@@ -47,16 +49,15 @@ def input (request):
                     sky.append(i['description'])
     min_temp = round(min(coldest_city))
     average_temp = round(sum(coldest_city) / len(coldest_city))
-    context= {'result': obj, 'name': name_of_city, 'cuurent_temp': current_temp, 'current_humidity': current_humidity, 'Sky_Descp': sky, 'min_temp': min_temp, 'average_temp': average_temp, 'city_not_found': city_not_found}
-    #return render(request, 'form.html', {"result": [city_not_found, name_of_city, current_temp, current_humidity, sky, min_temp, average_temp, obj]})
+    context= {'result': last_ten1, 'name': name_of_city, 'cuurent_temp': current_temp, 'current_humidity': current_humidity, 'Sky_Descp': sky, 'min_temp': min_temp, 'average_temp': average_temp, 'city_not_found': city_not_found}
     return render(request, 'form.html', context)
 #For User Input
 def index (request):
-     city_not_found = ""
-     name_of_city = "S"
-     current_humidity=""
-     current_temp = ""
-     sky = ""
+     city_not_found = None
+     name_of_city = None
+     current_humidity = None
+     current_temp = None
+     sky = None
      
 
 
@@ -68,7 +69,7 @@ def index (request):
      data = json.loads(response.text)
      if "message" in data:
           city_not_found = data["message"]
-                    
+                 
      else:
           name_of_city = data['name']
           
@@ -82,3 +83,9 @@ def index (request):
      WR_instance.save_base()
      WR_instance.save()   
      return render(request, 'form.html', {"smth":[city_not_found, name_of_city, current_temp, current_humidity, sky]})
+
+def table(request):
+    last_ten = RequestedCities.objects.all().order_by('-id')[:10]
+    last_ten1 = reversed(last_ten)
+    context= {'table': last_ten1}
+    return render(request, 'form.html', context)
