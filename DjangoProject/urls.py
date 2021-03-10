@@ -23,7 +23,7 @@ urlpatterns = [
     path('', views.input, name = "index"),
     path('input', views.index, name = "input"),
     path('table', views.table, name = "table"),
-
+    path('Compare', views.Compare, name = "Compare"),
     
 
   
