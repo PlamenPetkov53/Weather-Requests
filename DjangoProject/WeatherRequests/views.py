@@ -1,19 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 from .models import RequestedCities
+with open (r"C:\Users\Plamen\Desktop\django\WR\WR\city-city_id.json", encoding='utf-8-sig') as f:
+    data = json.load(f)
 import os
 import requests
 import re
 import random
-import json
+
 #For START UP Random Generator
 def input (request):
     x = " "
     api_key = "11f4d17a26f59a54f5685e9bf59ef4fe"
     new_list =[]
-    cities =  ['Tokyo', 'Delhi', 'Shanghai', 'Cairo', 'Monaco', 'Mumbai', 'Karachi', 'Osaka', 'Istanbul', 'Lago', 'Moscow', 'Lahore', 'Bangalore', 'Paris', 'Bogota', 'Jakarta', 'Lima', 'Seoul', 'London', 'Chicago', 'Madrid', 'Toronto', 'Sofia', 'Plovdiv', 'Burgas']
-    new_list += random.sample(cities, 5)
-    a = len(cities)
+    for x in range(5):
+        new_list.append(random.choice(list(data.keys())))
+
     coldest_city=[]
     input = ""
     city_not_found = ""
