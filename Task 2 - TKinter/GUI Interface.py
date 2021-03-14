@@ -45,6 +45,12 @@ class MyWindow:
         self.t9.place(x=200, y=500)
 
     def add(self):
+        self.t4.delete(0, END)
+        self.t5.delete(0, END)
+        self.t6.delete(0, END)
+        self.t7.delete(0, END)
+        self.t8.delete(0, END)
+        self.t9.delete(0, END)
         inpt = None
         user_input=self.t1.get()
         coldest_city = []
