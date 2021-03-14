@@ -1,14 +1,16 @@
-import requests
 import json
-import random
+import  random
+with open (r"C:\Users\Plamen\PycharmProjects\untitled4\city-city_id.json", encoding='utf-8-sig') as f:
+    data = json.load(f)
+import requests
 import re
 
 api_key = "11f4d17a26f59a54f5685e9bf59ef4fe"
 coldest_city=[]
 new_list =[]
-cities =  ['Tokyo', 'Delhi', 'Shanghai', 'Cairo', 'Monaco', 'Mumbai', 'Karachi', 'Osaka', 'Istanbul', 'Lago', 'Moscow', 'Lahore', 'Bangalore', 'Paris', 'Bogota', 'Jakarta', 'Lima', 'Seoul', 'London', 'Chicago', 'Madrid', 'Toronto', 'Sofia', 'Plovdiv', 'Burgas']
-new_list += random.sample(cities, 5)
 
+for x in range(5):
+    new_list.append(random.choice(list(data.keys())))
 
 
 for x in new_list:
