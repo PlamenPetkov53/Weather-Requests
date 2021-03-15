@@ -23,6 +23,11 @@ def RequestWeather():
     min_temp = ""
     average_temp = ""
     sky = []
+    ct_not_found = None 
+    nm_inpt = None
+    ct_inpt = None
+    ch_inpt = None
+    sky_inpt = None
     for x in new_list:
             url_five = f"http://api.openweathermap.org/data/2.5/weather?q={x}&appid={api_key}&units=metric"
             response_five = requests.get(url_five)
@@ -46,25 +51,32 @@ def RequestWeather():
     average_temp = round(sum(coldest_city) / len(coldest_city))
     
     if request.method == 'POST' and  'Input' in request.form:
+        name_of_city.clear
+        current_humidity.clear()
+        current_temp.clear()
+        sky.clear()
+        cities.clear()
+
+        
         first  = str(request.form.get('Input'))
         user_input = re.findall(r"[\w']+", first)
         url = f"http://api.openweathermap.org/data/2.5/weather?q={user_input[0]}&appid={api_key}&units=metric"
         response = requests.get(url)
         data = json.loads(response.text)
         if "message" in data:
-            city_not_found = data["message"]
+            ct_not_found = data["message"]
                     
         else:
-            name_of_city = data['name']
-            current_temp = round(data['main']['temp'])
-            current_humidity = data['main']['humidity']
+            nm_inpt = data['name']
+            ct_inpt = round(data['main']['temp'])
+            ch_inpt = data['main']['humidity']
             for i in data["weather"]:
-                sky = i['description']
+                sky_inpt = i['description']
                     
 
 
       
-    return render_template("index.html", city_not_found=city_not_found, name_of_city=name_of_city, current_temp=current_temp, current_humidity=current_humidity, sky=sky, min_temp=min_temp, average_temp=average_temp, a=a, new_list=new_list )
+    return render_template("index.html" , ct_not_found=ct_not_found, nm_inpt=nm_inpt, ct_inpt=ct_inpt, ch_inpt= ch_inpt, sky_inpt= sky_inpt,  city_not_found=city_not_found, name_of_city=name_of_city, current_temp=current_temp, current_humidity=current_humidity, sky=sky, min_temp=min_temp, average_temp=average_temp, a=a, new_list=new_list )
                         
 
 
