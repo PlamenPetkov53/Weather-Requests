@@ -20,11 +20,11 @@
     {% block content %}
     {% if city_not_found %}  {{ city_not_found }} {% endif %}  {% if city_not_found_input %} {{ city_not_found_input }}  {% endif %}<br>
     Name of citie/s:  {% if name %} {{ name.0 }}, {{name.1}}, {{name.2}}, {{name.3}}, {{name.4}}{% endif %}   {{ name_of_city_input }}<br>
-    Current temperature is: {% if cuurent_temp %} {{ cuurent_temp.0 }}, {{ cuurent_temp.1 }}, {{ cuurent_temp.2 }}, {{ cuurent_temp.3 }}, {{ cuurent_temp.4 }} {% endif %}  {{ current_temp_input }}<br>
-    Current humidity:{% if current_humidity %} {{ current_humidity.0 }}, {{ current_humidity.1 }}, {{ current_humidity.2 }}, {{ current_humidity.3 }}, {{ current_humidity.4 }} {% endif %}  {{ current_humidity_input }}<br>
+    Current temperature is: {% if cuurent_temp %} {{ cuurent_temp.0 }} °C, {{ cuurent_temp.1 }} °C, {{ cuurent_temp.2 }} °C, {{ cuurent_temp.3 }} °C, {{ cuurent_temp.4 }} °C {% endif %}  {{ current_temp_input }} °C<br>
+    Current humidity:{% if current_humidity %} {{ current_humidity.0 }} %, {{ current_humidity.1 }} %, {{ current_humidity.2 }} %, {{ current_humidity.3 }} %, {{ current_humidity.4 }} % {% endif %}  {{ current_humidity_input }} %<br>
     Sky description:   {% if Sky_Descp %} {{ Sky_Descp.0 }}, {{ Sky_Descp.1 }}, {{ Sky_Descp.2 }}, {{ Sky_Descp.3 }}, {{ Sky_Descp.4 }} {% endif %}   {{ Sky_Descp_input }}<br>
-    {% if min_temp %} Minimum temperature is : {{ min_temp }} {% endif %}<br>   
-    {% if average_temp %} Average temperature: {{average_temp}} {% endif %}<br>    
+    {% if min_temp %} Minimum temperature is : {{ min_temp }} °C {% endif %}<br>   
+    {% if average_temp %} Average temperature: {{average_temp}} °C {% endif %}<br>    
     {% endblock %}
     <form action="table">
     <table border="1" width="600">
@@ -32,7 +32,7 @@
         <tr>
         <td>Id</td>
         <td>Cties name</td>
-        <td>Temperature (celsius degrees) </td>
+        <td>Temperature (°C) </td>
         <td>Humidity (%)</td>
         <td>Sky Conditions</td>
         </tr>
@@ -65,7 +65,7 @@
         {% if id1 %}
         <tr>                                                
         <td>Cties name</td>                                     
-        <td>Temperature (celsius degrees) </td>             
+        <td>Temperature (°C) </td>             
         <td>Humidity (%)</td>                                   
         <td>Sky Conditions</td>                                 
         </tr>                                           
@@ -89,7 +89,7 @@
             {% if id2 %}
             <tr>                                                
             <td>Cties name</td>                                     
-            <td>Temperature (celsius degrees) </td>             
+            <td>Temperature (°C) </td>             
             <td>Humidity (%)</td>                                   
             <td>Sky Conditions</td>                                 
             </tr>                                           
