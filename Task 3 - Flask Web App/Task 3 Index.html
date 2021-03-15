@@ -1,0 +1,54 @@
+<html>
+    <body>
+        <form action="/" method = 'POST'>
+        Enter city:
+        <input type = "text" name = "Input"><br>
+        
+        <button type="submit" value = "submit">Request</button>
+        </form>
+        {%if city_not_found %}
+        <p> {{city_not_found}}</p>
+        {%endif%}
+
+        {%if name_of_city %}
+        <p>Name of citie/s: {{name_of_city.0}}, {{name_of_city.1}}, {{name_of_city.2}}, {{name_of_city.3}}, {{name_of_city.4}}</p>
+        {%endif%}
+
+        {% if nm_inpt %}
+        <p>Name of City: {{nm_inpt}}</p>
+        {% endif %}
+
+        {%if current_temp %}
+        <p>Current temperature is : {{current_temp.0}} °C, {{current_temp.1}} °C, {{current_temp.2}} °C, {{current_temp.3}} °C, {{current_temp.4}} °C</p>
+        {%endif%}
+
+        {% if ct_inpt %}
+        <p>Current Temp:  {{ct_inpt}} °C</p>
+        {% endif %}
+
+        {%if current_humidity %}
+        <p>Current humidity: {{current_humidity.0}} %, {{current_humidity.1}} %, {{current_humidity.2}} %, {{current_humidity.3}} %, {{current_humidity.4}} %</p>
+        {%endif%}
+
+        {% if ch_inpt %}
+        <p>Current Humidity: {{ch_inpt}} %</p>
+        {% endif %}
+    
+        {%if sky %}
+        <p>Sky description: {{sky.0}}, {{sky.1}}, {{sky.2}}, {{sky.3}}, {{sky.4}}</p>
+        {%endif%}
+
+        {% if sky_inpt %}
+        <p>Sky descp: {{sky_inpt}}</p>
+        {% endif %}
+
+        {%if min_temp %}
+        <p>Minimum temperature is : {{min_temp}} °C</p>
+        {%endif%}
+
+       
+        {%if  average_temp %}
+        <p>Average temperature: {{average_temp}} °C</p>
+        {%endif%}
+    </body>
+</html>
